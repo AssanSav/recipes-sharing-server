@@ -1,11 +1,12 @@
-class UsersController < ApplicationController 
+class Api::UsersController < ApplicationController 
+    wrap_parameters :user, include: [:username, :email, :password, :password_confirmation]
 
-    def signup 
+    def create
         @user = User.create!(user_params)
         if @user
-            sesion[:user_id] = @user.id
+            session[:user_id] = @user.id
             render json: {
-                status: created,
+                status: :created,
                 user: @user
             }
         else 
