@@ -1,6 +1,6 @@
 class UsersController < ApplicationController 
 
-    def create 
+    def signup 
         @user = User.create!(user_params)
         if @user
             sesion[:user_id] = @user.id
