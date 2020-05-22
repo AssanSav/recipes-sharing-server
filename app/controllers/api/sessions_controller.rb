@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
             session[:user_id] = @user.id
             render json: {
                 status: 200,
-                user: @user
+                user: UserSerializer.new(@user)
             }
              else
             render json: { 
@@ -20,7 +20,7 @@ class Api::SessionsController < ApplicationController
         if !!session[:user_id] && current_user
             render json: {
                 logged_in: true,
-                user: current_user
+                user: UserSerializer.new(current_user)
             }
         else 
             render json: {

@@ -3,9 +3,12 @@ class Api::RecipesController < ApplicationController
     def index 
         @recipes = Recipe.all
         if @recipes 
+            options = {
+                include: [:category, :user]
+            }
             render json: {
                 status: 200,
-                recipes: @recipes
+                recipes: RecipeSerializer.new(@recipes, options)
             }
         else 
             render json: {
