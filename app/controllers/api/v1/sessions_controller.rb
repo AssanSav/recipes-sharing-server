@@ -29,4 +29,15 @@ class SessionsController < ApplicationController
             }
         end
     end
+
+    def logout 
+        @user = User.find(session[:user_id])
+        if @user 
+            session.clear 
+            render json: {
+                status: 200,
+                logout: true
+            }
+        end
+    end
 end
