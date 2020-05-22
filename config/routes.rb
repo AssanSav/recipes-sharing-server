@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   end
 
   get "api/login/status", to: "api/sessions#is_logged_in?"
-  post "api/login", to: "api/sessions#login"
+  post "api/login", to: "api/sessions#create"
   delete "api/logout/:id", to: "api/sessions#destroy"
 end

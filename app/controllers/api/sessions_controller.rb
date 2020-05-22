@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController 
 
-    def login
+    def create
         @user = User.find_by(email: params[:email])
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
@@ -30,7 +30,7 @@ class Api::SessionsController < ApplicationController
         end
     end
 
-    def logout 
+    def destroy
         @user = User.find(session[:user_id])
         if @user 
             session.clear 
