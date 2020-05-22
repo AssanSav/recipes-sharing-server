@@ -8,7 +8,6 @@
 
 
 Api.request["meals"].each do |attr|
-    # user = User.find_by(id: 1)
     category = Category.find_or_create_by(id: attr["idMeal"], user_id: 2, name: attr["strCategory"])
     recipe = Recipe.find_or_create_by(category_id: category.id, user_id: 2, name: attr["strMeal"], image: attr["strMealThumb"], directions: attr["strInstructions"])
     20.times do |index|
