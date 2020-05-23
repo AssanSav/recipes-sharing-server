@@ -26,6 +26,19 @@ class Recipe < ApplicationRecord
 		end
     end
     
+    def ingredients 
+        self.recipe_ingredients.map do |rec_ingr|
+            if rec_ingr.recipe_id == self.id 
+                {
+                    id: rec_ingr.ingredient.id,
+                    name: rec_ingr.ingredient.name,
+                    amount: rec_ingr.amount
+                }
+            end
+        end
+    end
+
+
     def ingredient_names 
 		self.recipe_ingredients.map(&:ingredient_id)
 		if ingredient_ids != ingredient_ids.uniq
