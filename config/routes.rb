@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   resources :ingredients
-  resources :recipe_ingredients
   
   namespace :api do 
     resources :categories
-    resources :recipes
     resources :users, only: [:create, :show]
+    resources :recipes do 
+      resources :recipe_ingredients
+    end
   end
 
   get "api/login/status", to: "api/sessions#is_logged_in?"
