@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   resources :ingredients
   resources :recipe_ingredients
-  resources :categories
+  
   namespace :api do 
+    resources :categories
     resources :recipes
     resources :users, only: [:create, :show]
   end
