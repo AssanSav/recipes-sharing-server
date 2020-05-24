@@ -46,9 +46,25 @@ class Api::RecipesController < ApplicationController
         end
     end
 
+    def update 
+        @recipe = current_user.recipes.find(params[:id])
+        if @recipe 
+            @recipe.update(recipe_params)
+            render json: {
+                status: 200,
+                recipe: RecipeSerializer.new(@recipe)
+            }
+        else
+            render json: {
+                status: 500,
+                errors: @recipe.errors.full_messages
+            }
+        end
+    end
+
     private 
     
     def recipe_params
-        params.require(:recipe).permit(:name, :image, :directions, :category_id)
+        params.require(:recipe).permit(:id, :name, :image, :directions, :category_id)
     end
 end
