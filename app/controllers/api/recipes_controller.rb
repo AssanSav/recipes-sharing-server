@@ -62,6 +62,22 @@ class Api::RecipesController < ApplicationController
         end
     end
 
+    def destroy 
+        @recipe = current_user.recipes.find(params[:id])
+        if @recipe.destroy
+            render json: {
+                status: 200,
+                recipe: @recipe,
+                massage: ["Record was successfully deleted!"]
+            }
+        else 
+            render json: {
+                status: 500,
+                errors: @recipe.errors.full_messages
+            }
+        end    
+    end
+
     private 
     
     def recipe_params
