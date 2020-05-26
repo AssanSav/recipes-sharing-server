@@ -5,7 +5,7 @@ class RecipeIngredient < ApplicationRecord
     validates :amount, presence: true
     validates_uniqueness_of :ingredient_id, scope: :recipe_id
 
-     def ingredient_name=(name) 
+    def ingredient_name=(name) 
         self.ingredient = Ingredient.find_or_create_by(name: name)
     end
 

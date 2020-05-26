@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 gem 'pry-rails', '~> 0.3.9'
-gem 'fast_jsonapi'
+gem 'fast_jsonapi', '~> 1.5'
 gem 'typhoeus', '~> 1.4'
 
 # Use Active Storage variant
