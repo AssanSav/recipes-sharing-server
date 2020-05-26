@@ -18,9 +18,26 @@ class Api::RecipeIngredientsController < ApplicationController
         end
     end
 
+    def update 
+        @recipe = current_user.recipes.find(params[:recipe_id])
+        @ingredient = Ingredient.find(params[:id])
+        rec_ing = RecipeIngredient.find_by(ingredient_id: @ingredient.id)
+        if @recipe && rec_ing.ingredient.update(name: params[:ingredient][:ingredient_name]) && rec_ing.update(amount: params[:ingredient][:amount])
+            render json: {
+                status: 200,
+                ingredient: @ingredient
+            }
+        else 
+            render json: {
+                status: 500,
+                errors: ingredient.errors.full_messages
+            }
+        end
+    end
+
     private 
 
     def ingredient_params
-        params.require(:ingredient).permit(:ingredient_name, :amount, :recipe_id)
+        params.require(:ingredient).permit( :ingredient_name, :amount, :recipe_id)
     end
 end
