@@ -35,6 +35,21 @@ class Api::RecipeIngredientsController < ApplicationController
         end
     end
 
+    def destroy 
+        @ingredient = Ingredient.find(params[:id])
+        if @ingredient.destroy
+            render json: {
+                status: 200,
+                ingredient: @ingredient
+            }
+        else 
+            render json: {
+                status: 500,
+                errors: @ingredient.errors.full_messages
+            }
+        end
+    end
+
     private 
 
     def ingredient_params
