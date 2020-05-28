@@ -1,7 +1,7 @@
 class Api::RecipesController < ApplicationController
 
     def index 
-        @recipes = Recipe.all
+        @recipes = Recipe.desc_listing
         if @recipes 
             render json: {
                 status: 200,
@@ -49,6 +49,7 @@ class Api::RecipesController < ApplicationController
     def update 
         @recipe = current_user.recipes.find(params[:id])
         if @recipe 
+            # binding.pry
             @recipe.update(recipe_params)
             render json: {
                 status: 200,
@@ -67,8 +68,7 @@ class Api::RecipesController < ApplicationController
         if @recipe.destroy
             render json: {
                 status: 200,
-                recipe: @recipe,
-                massage: ["Record was successfully deleted!"]
+                recipe: @recipe
             }
         else 
             render json: {
