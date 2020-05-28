@@ -49,4 +49,9 @@ class Recipe < ApplicationRecord
     def name_capitalizer
         self.name = self.name.capitalize
     end
+
+    def self.desc_listing
+		all.order(created_at: :desc)
+    end
+    
 end
