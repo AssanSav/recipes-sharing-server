@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do 
   allow do
-    origins 'https://recipes-sharing-client.herokuapp.com'
+    origins 'https://sharing-food-recipes.herokuapp.com'
   
     resource '*',
       headers: :any,
