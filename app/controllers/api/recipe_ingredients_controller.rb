@@ -30,7 +30,7 @@ class Api::RecipeIngredientsController < ApplicationController
         else 
             render json: {
                 status: 500,
-                errors: ingredient.errors.full_messages
+                errors: @ingredient.errors.full_messages
             }
         end
     end
