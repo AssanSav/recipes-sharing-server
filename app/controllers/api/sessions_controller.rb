@@ -1,19 +1,24 @@
 class Api::SessionsController < ApplicationController 
 
     def create
-        @user = User.find_by(email: params[:email])
-        if @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
-            render json: {
-                status: 200,
-                user: UserSerializer.new(@user)
-            }
-             else
-            render json: { 
-                status: 401,
-                errors: ['no such user', 'verify credentials and try again or signup']
-            }
-        end
+      user = User.find_by(email: params[:email])
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        render json: {
+          status: 200,
+          user: UserSerializer.new(user)
+        }
+      elsif user 
+        render json: {
+          status: 500,
+          passwordError: ["*Wrong Password!"],
+        }
+      else
+          render json: {
+          status: 500,
+          email_error: ["*Email Not Found!"]
+        }
+      end
     end
 
     def is_logged_in?
